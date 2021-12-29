@@ -4,5 +4,18 @@
       "title": "Not found",
       "subtext_html": "The page you were looking for does not exist"
     }
+  },
+  "product": {
+    "copy": {
+      "headline": "Hassle free fitness tracking",
+      "description_headline": "Information"
+    },
+    "details_list": {
+      "item1": "Companion apps for iOS & Android",
+      "item2": "Preorders begin shipping this March"      
+    },
+    "form": {
+      "submit": "Preorder"
+    }
   }
 }
