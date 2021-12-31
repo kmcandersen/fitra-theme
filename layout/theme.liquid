@@ -17,12 +17,17 @@
     </head>
     <body class="template-{{ template }}">
         {% if template != 'cart' %}
-            <a class="link-to-cart" href="/cart">
-                {% if cart.item_count > 0 %}
-                    {{ 'cart.button.filled' | t }}
-                {% else %}
-                {{ 'cart.button.empty' | t }}
-                {% endif %}
+            <a href="/cart" class="link-to-cart {% if cart.item_count > 0 %}cart-filled{% endif %}">
+                <span class="cart-text">
+                    {% if cart.item_count > 0 %}
+                        {{ 'cart.button.filled' | t }}
+                    {% else %}
+                        {{ 'cart.button.empty' | t }}
+                    {% endif %}
+                </span>
+                <span class="cart-item-count">
+                    {{cart.item_count}}
+                </span>
             </a>
         {% else %}
             <a class="link-to-home" href="/">{{ 'cart.button.close' | t }}</a>

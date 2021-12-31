@@ -42,7 +42,12 @@
       font-weight: 400;
   }
 
+  a {
+      text-decoration: none;
+  }
+
 /* STYLE GUIDE */
+
 .headline-big {
     font-size: 22vw;
     line-height: 1;
@@ -83,6 +88,7 @@ label {
 }
 
 /* UTILITY CLASSES */
+
 .grid {
     display: grid;
     grid-column-gap: var(--gutter-global);
@@ -120,6 +126,50 @@ label {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* GLOBAL STYLES */
+
+.link-to-cart {
+    position: fixed;
+    top: 0;
+    right: 0;
+    padding: var(--gutter-global);
+    color: var(--color-text);
+}
+
+.link-to-cart .cart-item-count {
+    display: block;
+    font-size: 0px;
+    width: 10px;
+    height: 10px;
+    background: var(--color-border);
+    border-radius: 100%;
+    margin-top: 4px;
+}
+
+.link-to-cart .cart-text {
+    display: none;
+    position: absolute;
+    right: calc(100% - var(--gutter-global)/2);
+    top: var(--gutter-global);
+    white-space: nowrap;
+}
+
+.link-to-cart.cart-filled .cart-item-count {
+    width: 20px;
+    height: 20px;
+    background: var(--color-accent);
+    font-size: var(--label-font-size);
+    /* same as height so vertically centered: */
+    line-height: var(--line-global);
+    color: var(--white);
+    text-align: center;
+    margin-top: 0;
+}
+
+.link-to-cart:hover .cart-text {
+    display: block;
 }
 
 /* SELECT FORM */
