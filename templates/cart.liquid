@@ -2,58 +2,68 @@
     <div class="sticky-side-image">
         <img src="{{ 'Hero-Cart.jpg' | asset_url }}" alt="model wearing watch">
     </div>
-    <div class="main-content grid" id="cart">
+    <div class="main-content grid {% if cart.item_count > 0 %}cart-filled{% endif %}" id="cart">
         <div class="valign-center">
             <h1 class="headline-big" id="cart-title">
                 {{ 'cart.general.title' | t }}
                 <span class="cart-item-count">{{ cart.item_count }}</span>
             </h1>
         </div>
-        <div class="grid" id="cart-content">
+        <div id="cart-content" class="grid columns">
             {% if cart.item_count > 0 %}
-                <h2>{{ 'cart.general.preorder_info' | t }}</h2>
-                <form action="/cart" method="post" novalidate>
-                    <table>
-                        <thead>
-                            <th colspan="2">{{ 'cart.lines.title' | t }}</th>
-                        </thead>
-                        <tbody>
-                            {% for item in cart.items %}
+                <div class="valign-bottom">
+                    <h2>{{ 'cart.general.preorder_info' | t }}</h2>
+                </div>
+                <div id="cart-form-wrap">
+                    <form action="/cart" method="post" novalidate>
+                        <table id="cart-lines">
+                            <thead>
+                                <th colspan="2">{{ 'cart.lines.title' | t }}</th>
+                            </thead>
+                            <tbody>
+                                {% for item in cart.items %}
+                                    <tr>
+                                        <td>
+                                            {% if item.quantity > 1 %}
+                                                {{ item.quantity }}
+                                            {% endif %}
+                                            {{ item.product.title }}
+                                            &ndash;
+                                            {{ item.variant.title }}
+                                        </td>
+                                        <td>
+                                            {{ item.line_price | money }}
+                                            <a class="remove-line" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                                                <span class="remove-text">{{ 'cart.lines.remove' | t }}</span>
+                                                <img class="remove-x" src="{{ 'icon-x.svg' | asset_url }}"/>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <table id="cart-totals">
+                            <tbody>
                                 <tr>
-                                    <td>
-                                        {% if item.quantity > 1 %}
-                                            {{ item.quantity }}x
-                                        {% endif %}
-                                        {{ item.product.title }}
-                                        &ndash;
-                                        {{ item.variant.title }}
-                                    </td>
-                                    <td>
-                                        {{ item.line_price | money }}
-                                        <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">X</a>
-                                    </td>
+                                    <td>{{ 'cart.lines.shipping' | t }}</td>
+                                    <td>{{ 'cart.lines.free' | t }}</td>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                    <table id="cart-totals">
-                        <tbody>
-                            <tr>
-                                <td>{{ 'cart.lines.shipping' | t }}</td>
-                                <td>{{ 'cart.lines.free' | t }}</td>
-                            </tr>
-                            <tr>
-                                <td>{{ 'cart.lines.subtotal' | t }}</td>
-                                <td>{{ cart.total_price | money }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button name="checkout" type="submit">{{ 'cart.general.checkout' | t }}</button>
-                </form>
-                <p>
-                    {{ 'cart.general.support_title' | t }}
-                    <a href="{{ 'cart.general.support_email' | t }}">{{ 'cart.general.support_email' | t }}</a>
-                </p>
+                                <tr>
+                                    <td>{{ 'cart.lines.subtotal' | t }}</td>
+                                    <td>{{ cart.total_price | money }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button id="checkout-button" name="checkout" type="submit">{{ 'cart.general.checkout' | t }}</button>
+                    </form>
+                </div>
+                <div id="cart-support">
+                    <p>
+                        {{ 'cart.general.support_title' | t }}
+                        <br/>
+                        <a href="{{ 'cart.general.support_email' | t }}">{{ 'cart.general.support_email' | t }}</a>
+                    </p>
+                </div>
             {% else %}
                 <div id="cart-empty-lines">
                     {{ 'cart.general.empty' | t }}
@@ -61,7 +71,7 @@
                         <div class="empty-line"></div>
                     {% endfor %}
                 </div>
-                <div id="back-to-fitra" class="valign-bottom">
+                <div class="valign-bottom" id="back-to-fitra">
                     <a href="/">
                         {{ 'cart.general.back' | t }}</a>
                 </div>

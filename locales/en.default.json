@@ -12,7 +12,7 @@
     },
     "details_list": {
       "item1": "Companion apps for iOS & Android",
-      "item2": "Preorders begin shipping this March"      
+      "item2": "Preorders begin shipping this March."      
     },
     "form": {
       "submit": "Preorder"
@@ -24,7 +24,7 @@
       "preorder_info": "All preorders ship free this March.",
       "support_title": "Any questions?",
       "support_email": "support@getfitra.com",
-      "checkout": "Checkout",
+      "checkout": "Check out",
       "empty": "Your cart is empty",
       "back": "Back to Fitra"
     },
@@ -37,7 +37,8 @@
       "title": "Order Summary",
       "shipping": "Shipping",
       "subtotal": "Subtotal",
-      "free": "Free"
+      "free": "Free",
+      "remove": "Remove"
     }
   }
 }
