@@ -1,43 +1,61 @@
 {% assign mainProduct = all_products['fitra-activity-band'] %}
+<div id="page-index">
 
-<h1>{{ mainProduct.title }}</h1>
+    <div class="sticky-side-image" id="product-images">
+        <!-- {% for image in mainProduct.images %}
+            <img src="{{ image | img_url: 'large' }}"/>
+        {% endfor %} -->
+        <div class="single-product-image">
+            <img src="{{ mainProduct.images[0] | img_url: 'x1440' }}"/>
+        </div>
+    </div>
 
-<div id="product-images">
-  {% for image in mainProduct.images %}
-    <img src="{{ image | img_url: 'large' }}" />
-  {% endfor %}  
+    <div class="main-content grid" id="product-info">
+        <div class="valign-center">
+            <h1 class="headline-big">{{ mainProduct.title | remove: ' Activity Band'}}</h1>
+        </div>
+
+        <!-- Begin Info Grid -->
+        <div id="product-info-content" class="grid columns">
+            <div class="headline valign-center">
+                <h2>{{ 'product.copy.headline' | t }}</h2>
+            </div>
+
+            <div class="description">
+                <h3>{{ 'product.copy.description_headline' | t }}</h3>
+                <div class="description-content">
+                    {{ mainProduct.description }}
+                </div>
+            </div>
+
+            <div class="details">
+                <ul class="list-with-stroke">
+                    <li>{{ 'product.details_list.item1' | t }}</li>
+                    <li>{{ 'product.details_list.item2' | t }}</li>
+                </ul>
+            </div>
+
+            <div class="form-wrapper">
+                <form action="/cart/add" enctype="multipart/form-data" id="add-to-cart-form" method="post">
+                    <label for="product-select">{{ mainProduct.options.first }}</label>
+                    <div class="styled-select">
+                        <select id="product-select" name="id">
+                            {% for variant in mainProduct.variants %}
+                                <option value="{{variant.id}}">{{variant.title}}</option>
+                            {% endfor %}
+                        </select>
+                        <div class="select-arrow">
+                            <img src="{{ 'icon-arrow-down.svg' | asset_url }}">
+                        </div>
+                    </div>
+                    <button id="add-to-cart-button" name="add" type="submit">
+                        {{ 'product.form.submit' | t }}
+                        <span class="product-price">{{ mainProduct.price | money_without_trailing_zeros }}</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <!-- End Info Grid -->
+
+    </div>
 </div>
-
-<div id="product-info">
-  <div class="headline">
-    <h2>{{ 'product.copy.headline' | t }}</h2>
-  </div>
-
-  <div class="description">
-    <h3>{{ 'product.copy.description_headline' | t }}</h3>
-    {{ mainProduct.description }}
-  </div>
-
-  <div class="details">
-    <ul>
-      <li>{{ 'product.details_list.item1' | t }}</li>
-      <li>{{ 'product.details_list.item2' | t }}</li>
-    </ul>
-  </div>
-
-  <div class="form-wrapper">
-    <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm">
-      <label for="productSelect">{{ mainProduct.options.first }}</label>
-      <select name="id" id="productSelect">
-        {% for variant in mainProduct.variants %}
-          <option value="{{variant.id}}">{{variant.title}}</option>
-        {% endfor %}
-      </select>
-      <button type="submit" name="add" id="AddToCart">
-        {{ 'product.form.submit' | t }}
-        <span class="product-price">{{ mainProduct.price | money_without_trailing_zeros }}</span>
-      </button>
-    </form>
-  </div>
-</div>
-
