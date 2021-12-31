@@ -31,11 +31,14 @@
             </a>
         {% else %}
             <a class="link-to-home" href="/">{{ 'cart.button.close' | t }}</a>
-            {% endif %}
-
-            <main role="main">
-                {{ content_for_layout }}
-            </main>
+            {% endif %}   
+                {% if template != 'cart' and template != 'index' %}
+                    {% include 'error-404' %}
+                {% else %}
+                    <main role="main">
+                        {{ content_for_layout }}
+                    </main>
+                {% endif %}                          
         </body>
     </body>
 </html>

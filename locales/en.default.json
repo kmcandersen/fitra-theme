@@ -1,8 +1,8 @@
 {
   "general": {
     "404": {
-      "title": "Not found",
-      "subtext_html": "The page you were looking for does not exist"
+      "title": "Sorry, we can't find that page.",
+      "back": "Back to Fitra"
     }
   },
   "product": {
