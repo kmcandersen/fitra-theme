@@ -1,13 +1,13 @@
 {% assign mainProduct = all_products['fitra-activity-band'] %}
+
 <div id="page-index">
 
     <div class="sticky-side-image" id="product-images">
-        <!-- {% for image in mainProduct.images %}
-            <img src="{{ image | img_url: 'large' }}"/>
-        {% endfor %} -->
-        <div class="single-product-image">
-            <img src="{{ mainProduct.images[0] | img_url: 'x1440' }}"/>
-        </div>
+        {% for image in mainProduct.images %}
+            <div class="single-product-image" {% if image.attached_to_variant? %} data-variant="{{ image.variants.first.id }}" {% endif %} style="{% if forloop.index > 1 %}display: none;{% endif %}">
+                <img src="{{ image | img_url: 'x1440' }}"/>
+            </div>
+        {% endfor %}
     </div>
 
     <div class="main-content grid" id="product-info">
@@ -16,7 +16,7 @@
         </div>
 
         <!-- Begin Info Grid -->
-        <div id="product-info-content" class="grid columns">
+        <div class="grid columns" id="product-info-content">
             <div class="headline valign-center">
                 <h2>{{ 'product.copy.headline' | t }}</h2>
             </div>
@@ -39,7 +39,7 @@
                 <form action="/cart/add" enctype="multipart/form-data" id="add-to-cart-form" method="post">
                     <label for="product-select">{{ mainProduct.options.first }}</label>
                     <div class="styled-select">
-                        <select id="product-select" name="id">
+                        <select class="variant-select" id="product-select" name="id">
                             {% for variant in mainProduct.variants %}
                                 <option value="{{variant.id}}">{{variant.title}}</option>
                             {% endfor %}
